@@ -42,7 +42,7 @@ function normalizePort(val: any): number | boolean {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: any): void {
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -68,8 +68,8 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
-  var addr = server.address();
+function onListening(): void {
+  var addr: any = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   //debug("Listening on " + bind);
   console.log("Server running on port: ", port);
