@@ -1,11 +1,11 @@
-import express from "express";
+import express, { Response, Request, RequestHandler } from "express";
 import cors from "cors";
+import authRouter from "./routes/auth";
 
 const app = express();
 
 app.use(cors());
-app.get("/", (req, res, next) => {
-  res.send("Hello world");
-});
+
+app.use("/api/auth", authRouter);
 
 export default app;
