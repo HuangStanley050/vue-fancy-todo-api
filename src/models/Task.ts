@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 export type TaskDocument = mongoose.Document & {
   title: string;
+  creator: string;
   information: string;
   dudDate: Date;
   completed: boolean;
@@ -11,6 +12,10 @@ export type TaskDocument = mongoose.Document & {
 const TaskSchema = new Schema(
   {
     title: {
+      type: String,
+      required: true
+    },
+    creator: {
       type: String,
       required: true
     },
