@@ -1,6 +1,14 @@
 import app from "./app";
 import http from "http";
+import mongoose from "mongoose";
 
+declare var process: {
+  exit: any;
+  env: {
+    DB_URI: string;
+    PORT: number;
+  };
+};
 const port = normalizePort(process.env.PORT || "8000");
 app.set("port", port);
 
@@ -14,9 +22,18 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
+mongoose
+  .connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Server started and is connected to database");
+    server.listen(port);
+    server.on("error", onError);
+    server.on("listening", onListening);
+  })
+  .catch(err => console.log(err));
 
 /**
  * Normalize a port into a number, string, or false.
