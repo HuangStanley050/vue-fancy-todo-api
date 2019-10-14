@@ -15,7 +15,7 @@ export default {
       await auth.verifyIdToken(token);
     } catch (err) {
       const error: Error = new Error("Unable to verify token");
-      error.statusCode = 500;
+      error.statusCode = 401;
       return next(error);
     }
     next();
