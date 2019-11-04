@@ -4,7 +4,7 @@ import * as admin from "firebase-admin";
 import serviceAccount from "./graphql-gram-94075-firebase-adminsdk-ejim3-44c474bfe5.json";
 import authRouter from "./routes/auth";
 import dataRouter from "./routes/data";
-
+import emailRouter from "./routes/email";
 export interface Error {
   statusCode?: number;
   message?: string;
@@ -35,6 +35,7 @@ app.use(cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/data", dataRouter);
+app.use("/api/email", emailRouter);
 app.use((err: Error, req: Request, res: Response, next: RequestHandler) => {
   const status: number = err.statusCode || 500;
   const message: string = err.message || "";
